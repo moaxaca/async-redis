@@ -9,6 +9,10 @@ const AsyncRedis = function (options) {
   return AsyncRedis.decorate(client);
 };
 
+AsyncRedis.createClient = (options) => {
+  return new AsyncRedis(options);
+};
+
 AsyncRedis.decorate = (redis) => {
   return objectDecorator(redis, (name, method) => {
     if (commands.includes(name)) {

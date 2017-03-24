@@ -4,10 +4,7 @@ const { assert } = require('chai');
 const AsyncRedis = require('../../index');
 
 describe('AsyncDecorator', function () {
-  let redisClient = null;
-  beforeEach(async() => {
-    redisClient = new AsyncRedis();
-  });
+  let redisClient = AsyncRedis.createClient();
 
   afterEach(async() => {
     redisClient.flushall();
