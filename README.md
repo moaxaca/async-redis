@@ -3,10 +3,6 @@ Async Redis
 
 This is a light weight wrapper over the node_redis library with first call promise support. Ideal for ES7 async functions. 
 
-Install with:
-
-    npm install async-redis
-
 ## Usage Example
 
 ```js
