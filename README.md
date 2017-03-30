@@ -13,23 +13,17 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-const async fn() {
+const async asyncBlock() {
   return await client.set("string key", "string val");
 };
-
-fn()
-  .then((results) => {
-    // Handle Results
-  })
-  .catch((error) => {
-    // Handle Errors
-  });
 ```
 
 ## Decorating Existing Connection
 ```js
+const redis = require("redis");
+const client = redis.createClient();
 const asyncRedis = require("async-redis");
-const asyncClient = asyncRedis.decorate(redisClient);
+const asyncRedisClient = asyncRedis.decorate(client);
 ```
 
 ## API Information
