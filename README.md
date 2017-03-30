@@ -13,7 +13,7 @@ client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-const async asyncBlock() {
+const asyncBlock = async () => {
   return await client.set("string key", "string val");
 };
 ```
