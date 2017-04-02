@@ -1,7 +1,7 @@
 Async Redis
 ===========================
 
-This is a light weight wrapper over the node_redis library with first call promise support. Ideal for ES7 async functions. 
+This is a light weight wrapper over the node_redis library with first class promise support. Ideal for ES7 async functions. 
 
 ## Usage Example
 
