@@ -1,6 +1,9 @@
 Async Redis
 ===========================
 
+[![Build Status](https://travis-ci.org/moaxaca/async-redis.svg?branch=master)](https://travis-ci.org/moaxaca/async-redis)
+[![Coverage Status](https://coveralls.io/repos/github/moaxaca/async-redis/badge.svg)](https://coveralls.io/github/moaxaca/async-redis)
+
 This is a light weight wrapper over the node_redis library with first class promise support. Ideal for ES7 async functions. 
 
 ## Usage Example
