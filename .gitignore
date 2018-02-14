@@ -1,3 +1,7 @@
+# coverage
+.nyc_output
+coverage/
+
 .idea/
 node_modules/
 .env

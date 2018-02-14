@@ -3,12 +3,13 @@
   "name": "async-redis",
   "version": "1.0.0",
   "description": "A light wrapper over redis_node for first class promise support.",
-  "main": "index.js",
+  "main": "src/index.js",
   "engines": {
     "node": ">=7.6.0"
   },
   "scripts": {
-    "lint": "eslint --ext .js, src test",
+    "coveralls": "nyc --instrument=false --source-map=false report --temp-directory=./coverage --reporter=text-lcov | coveralls",
+    "lint": "eslint --fix --ext .js, src",
     "test": "mocha test --recursive",
     "version:patch": "npm --no-git-tag-version version patch",
     "version:minor": "npm --no-git-tag-version version minor",
@@ -28,12 +29,14 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^3.0.0",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "nyc": "^11.4.1"
   },
   "repository": {
     "type": "git",
