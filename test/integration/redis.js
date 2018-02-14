@@ -1,9 +1,7 @@
-"use strict";
-
 const { assert } = require('chai');
 const AsyncRedis = require('../../index');
 
-describe('AsyncDecorator', function () {
+describe('AsyncRedis.createClient', function () {
   let redisClient = AsyncRedis.createClient();
 
   afterEach(async() => {

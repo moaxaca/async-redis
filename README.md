@@ -5,6 +5,7 @@ This is a light weight wrapper over the node_redis library with first class prom
 
 ## Usage Example
 
+### Creating Connection
 ```js
 const asyncRedis = require("async-redis");
 const client = asyncRedis.createClient();
@@ -18,7 +19,7 @@ const asyncBlock = async () => {
 };
 ```
 
-## Decorating Existing Connection
+### Decorating Existing Connections
 ```js
 const redis = require("redis");
 const client = redis.createClient();
