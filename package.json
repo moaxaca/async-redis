@@ -8,7 +8,7 @@
     "node": ">=7.6.0"
   },
   "scripts": {
-    "coveralls": "nyc --instrument=false --source-map=false report --temp-directory=./coverage --reporter=text-lcov | coveralls",
+    "coveralls": "nyc yarn test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint --fix --ext .js, src",
     "test": "mocha test --recursive",
     "version:patch": "npm --no-git-tag-version version patch",
