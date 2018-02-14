@@ -1,8 +1,7 @@
 const { assert } = require('chai');
 const redis = require('redis');
 const commands = require('redis-commands').list;
-
-const AsyncRedis = require('../../index');
+const AsyncRedis = require('../../src');
 
 describe('AsyncRedis.decorate', function () {
   const client = redis.createClient();

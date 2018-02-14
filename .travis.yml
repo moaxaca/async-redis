@@ -1,27 +1,13 @@
-{
-  sudo: "required",
-  dist: "trusty",
-  services: {
-    "redis-server"
-  },
-  language: "node_js",
-  node_js: ["6"],
-  cache: {
-    directories: ["node_modules"]
-  },
-  before_install: [
-    "rm yarn.lock",
-    "export DISPLAY=:99.0",
-    "sh -e /etc/init.d/xvfb start",
-    "sleep 3"
-  ],
-  scripts: [
-    "yarn lint",
-    "yarn test",
-  ]
-  after_script: ["npm run coveralls"],
-  deploy: {
-    provider: "npm",
-    email: "mattoaxaca@gmail.com",
-  }
-}
+language: node_js
+sudo: false
+node_js:
+  - "node"
+  - "8"
+  - "7.6"
+services:
+  - redis-server
+install:
+  - yarn install
+script:
+  - yarn lint
+  - yarn test

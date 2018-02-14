@@ -9,17 +9,17 @@ const AsyncRedis = function (options) {
 
 AsyncRedis.createClient = options => new AsyncRedis(options);
 
-AsyncRedis.decorate = redis => objectDecorator(redis, (name, method) => {
+AsyncRedis.decorate = redisClient => objectDecorator(redisClient, (name, method) => {
   if (commands.includes(name)) {
     return (...args) => new Promise((resolve, reject) => {
-      args.push((error, results) => {
+      args.push((error, ...results) => {
         if (error) {
-          reject(results);
+          reject(error, ...results);
         } else {
-          resolve(results);
+          resolve(...results);
         }
       });
-      method.apply(redis, args);
+      method.apply(redisClient, args);
     });
   }
   return method;

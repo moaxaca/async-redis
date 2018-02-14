@@ -1,4 +1,4 @@
-const asyncRedis = require("../index");
+const asyncRedis = require("../src");
 const client = asyncRedis.createClient();
 
 client.on("error", function (err) {

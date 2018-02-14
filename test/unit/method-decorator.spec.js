@@ -1,7 +1,7 @@
 "use strict";
 
 const { assert } = require('chai');
-const objectDecorator = require('../../lib/objectDecorator');
+const objectDecorator = require('../../src/object-decorator');
 
 const Mock = function () {
   this.add = function(a, b) {
