@@ -8,7 +8,7 @@ Async Redis
 [![Maintainability](https://api.codeclimate.com/v1/badges/141c7e0d80d10b10c42a/maintainability)](https://codeclimate.com/github/moaxaca/async-redis/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/moaxaca/async-redis/badge.svg?targetFile=package.json)](https://snyk.io/test/github/moaxaca/async-redis?targetFile=package.json)
 
-A light weight wrapper over the node_redis library with first class promise support. Ideal for ES7 async functions. 
+Light weight wrapper over the node_redis library with first class promise support. Ideal for ES7 async functions. 
 
 ## Usage Example
 
