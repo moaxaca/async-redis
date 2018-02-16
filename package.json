@@ -12,6 +12,7 @@
   "license": "MIT",
   "description": "Light wrapper over redis_node with first class promise support.",
   "main": "src/index.js",
+  "typings": "./index.d.ts",
   "engines": {
     "node": ">=7.6.0"
   },

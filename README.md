@@ -1,14 +1,20 @@
 Async Redis
 ===========================
-
+[![Build Status](https://travis-ci.org/moaxaca/async-redis.svg?branch=master)](https://travis-ci.org/moaxaca/async-redis)
 [![npm](https://img.shields.io/npm/v/async-redis.svg)](https://www.npmjs.com/package/async-redis)
 [![npm](https://img.shields.io/npm/dm/async-redis.svg)](https://www.npmjs.com/package/async-redis)
-[![Build Status](https://travis-ci.org/moaxaca/async-redis.svg?branch=master)](https://travis-ci.org/moaxaca/async-redis)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/moaxaca/async-redis/blob/master/LICENSE)
 [![Coverage Status](https://coveralls.io/repos/github/moaxaca/async-redis/badge.svg)](https://coveralls.io/github/moaxaca/async-redis)
 [![Maintainability](https://api.codeclimate.com/v1/badges/141c7e0d80d10b10c42a/maintainability)](https://codeclimate.com/github/moaxaca/async-redis/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/moaxaca/async-redis/badge.svg?targetFile=package.json)](https://snyk.io/test/github/moaxaca/async-redis?targetFile=package.json)
 
 Light weight wrapper over the node_redis library with first class promise support. Ideal for ES7 async functions. 
+
+## Installation
+To install the stable version:
+``` 
+npm install --save async-redis
+```
 
 ## Usage Example
 
@@ -22,7 +28,10 @@ client.on("error", function (err) {
 });
 
 const asyncBlock = async () => {
-  return await client.set("string key", "string val");
+  await client.set("string key", "string val");
+  const value = await client.get("string key");
+  console.log(value);
+  await client.flushall("string key");
 };
 ```
 
@@ -41,4 +50,5 @@ It simply appends a promise resolving/rejecting callback for every command.
 For information on redis commands and configuration visit node_redis 
 [docs](http://redis.js.org). 
 
-
+## License
+MIT
