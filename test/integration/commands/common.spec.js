@@ -47,4 +47,11 @@ describe('Commands - Common', function () {
       assert.equal(status, true);
     });
   });
+
+  describe('test rejection', function () {
+    it('should reject promise on throw', async () => {
+      let promise = redisClient.set('hello');
+      assert.isRejected(promise, Error);
+    });
+  });
 });
