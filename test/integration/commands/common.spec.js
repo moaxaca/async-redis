@@ -1,8 +1,12 @@
 const { assert } = require('chai');
-const AsyncRedis = require('../../src');
+const AsyncRedis = require('../../../src');
 
-describe('AsyncRedis.createClient', function () {
-  let redisClient = new AsyncRedis();
+describe('Commands - Common', function () {
+  let redisClient;
+
+  beforeEach(async() => {
+    redisClient = new AsyncRedis();
+  });
 
   afterEach(async() => {
     redisClient.flushall();

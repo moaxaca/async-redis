@@ -12,7 +12,7 @@ const Mock = function () {
   };
 };
 
-describe('Method Decorator', function () {
+describe('Object Decorator', function () {
   it('should decorate a method', async () => {
     let mock = new Mock();
     let mockTwo = new Mock();

@@ -10,7 +10,7 @@
   ],
   "author": "Matthew Oaxaca",
   "license": "MIT",
-  "description": "Light wrapper over redis_node with first class promise support.",
+  "description": "Light wrapper over redis_node with first class async & promise support.",
   "main": "src/index.js",
   "typings": "./index.d.ts",
   "engines": {

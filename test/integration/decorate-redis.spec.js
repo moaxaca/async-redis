@@ -1,6 +1,6 @@
 const { assert } = require('chai');
 const redis = require('redis');
-const commands = require('redis-commands').list;
+const redisCommands = require('redis-commands');
 const AsyncRedis = require('../../src');
 
 describe('AsyncRedis.decorate', function () {
@@ -8,8 +8,9 @@ describe('AsyncRedis.decorate', function () {
   const asyncRedisClient = AsyncRedis.decorate(client);
 
   it('should have decorated every command', async () => {
-    for (let command of commands) {
-      assert.isFunction(asyncRedisClient[command], `Command isn't decorated ${command}`);
-    }
+    const commands = redisCommands.list;
+    commands.forEach(command => {
+      assert.isFunction(asyncRedisClient[command], `redis.${command} isn't decorated`);
+    });
   });
 });

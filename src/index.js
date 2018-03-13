@@ -1,13 +1,15 @@
+/* eslint func-names: ["error", "as-needed"] */
+
 const redis = require('redis');
 const commands = require('redis-commands').list;
 const objectDecorator = require('./object-decorator');
 
-const AsyncRedis = function (options) {
-  const client = redis.createClient(options);
+const AsyncRedis = function (...args) {
+  const client = redis.createClient(args);
   return AsyncRedis.decorate(client);
 };
 
-AsyncRedis.createClient = options => new AsyncRedis(options);
+AsyncRedis.createClient = (...args) => new AsyncRedis(args);
 
 AsyncRedis.decorate = redisClient => objectDecorator(redisClient, (name, method) => {
   if (commands.includes(name)) {
