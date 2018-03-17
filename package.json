@@ -20,9 +20,9 @@
     "coveralls": "nyc yarn test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint --fix --ext .js, src",
     "test": "mocha",
-    "version:patch": "npm --no-git-tag-version version patch",
-    "version:minor": "npm --no-git-tag-version version minor",
-    "version:major": "npm --no-git-tag-version version major"
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major"
   },
   "dependencies": {
     "redis": "^2.8.0",
