@@ -5,7 +5,7 @@ const commands = require('redis-commands').list;
 const objectDecorator = require('./object-decorator');
 
 const AsyncRedis = function (...args) {
-  const client = redis.createClient(args);
+  const client = Array.isArray(args) ? redis.createClient(...args) : redis.createClient(args);
   return AsyncRedis.decorate(client);
 };
 
