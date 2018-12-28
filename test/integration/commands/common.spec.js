@@ -54,4 +54,12 @@ describe('Commands - Common', function () {
       assert.isRejected(promise, Error);
     });
   });
+
+  describe('test multi not a promise', function () {
+    it('should be not equal', async () => {
+      let notAPromise = redisClient.multi();
+      console.log(notAPromise);
+      assert.notEqual(Promise.resolve(notAPromise), notAPromise);
+    });
+  });
 });
