@@ -11,8 +11,13 @@ const AsyncRedis = function (args) {
 
 AsyncRedis.createClient = (...args) => new AsyncRedis(args);
 
+// this is the set of commands to NOT promisify
+const commandsToSkipSet = new Set(['multi']);
+// this is the set of commands to promisify
+const commandSet = new Set(commands.filter(c => !commandsToSkipSet.has(c)));
+
 AsyncRedis.decorate = redisClient => objectDecorator(redisClient, (name, method) => {
-  if (commands.includes(name)) {
+  if (commandSet.has(name)) {
     return (...args) => new Promise((resolve, reject) => {
       args.push((error, ...results) => {
         if (error) {
