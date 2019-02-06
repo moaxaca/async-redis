@@ -40,11 +40,11 @@ AsyncRedis.decorate = redisClient => objectDecorator(redisClient, (name, method)
     return (...args) => {
       // Decorate the Multi object
       const multi = method.apply(redisClient, args);
-      return objectDecorator(multi, (name, method) => {
-        if (multiCommandSet.has(name)) {
-          return promisify(multi, method);
+      return objectDecorator(multi, (multiName, multiMethod) => {
+        if (multiCommandSet.has(multiName)) {
+          return promisify(multi, multiMethod);
         }
-        return method;
+        return multiMethod;
       });
     }
   }
