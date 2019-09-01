@@ -8,7 +8,7 @@ Async Redis
 [![Maintainability](https://api.codeclimate.com/v1/badges/141c7e0d80d10b10c42a/maintainability)](https://codeclimate.com/github/moaxaca/async-redis/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/moaxaca/async-redis/badge.svg?targetFile=package.json)](https://snyk.io/test/github/moaxaca/async-redis?targetFile=package.json)
 
-Light weight wrapper over the node_redis library with first class async & promise support. 
+Light weight wrapper over the [node_redis](https://github.com/NodeRedis/node_redis) library with first class async & promise support. 
 
 ## Installation
 To install the stable version:
