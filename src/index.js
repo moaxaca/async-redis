@@ -16,20 +16,26 @@ const commandsToSkipSet = new Set(['multi']);
 // this is the set of commands to promisify
 const commandSet = new Set(commands.filter(c => !commandsToSkipSet.has(c)));
 
-AsyncRedis.decorate = redisClient => objectDecorator(redisClient, (name, method) => {
-  if (commandSet.has(name)) {
-    return (...args) => new Promise((resolve, reject) => {
-      args.push((error, ...results) => {
-        if (error) {
-          reject(error, ...results);
-        } else {
-          resolve(...results);
-        }
+AsyncRedis.decorate = (redisClient) => {
+  const asyncClient = Object.create(redisClient);
+
+  objectDecorator(asyncClient, (name, method) => {
+    if (commandSet.has(name)) {
+      return (...args) => new Promise((resolve, reject) => {
+        args.push((error, ...results) => {
+          if (error) {
+            reject(error, ...results);
+          } else {
+            resolve(...results);
+          }
+        });
+        method.apply(redisClient, args);
       });
-      method.apply(redisClient, args);
-    });
-  }
-  return method;
-});
+    }
+    return method;
+  });
+
+  return asyncClient;
+};
 
 module.exports = AsyncRedis;
