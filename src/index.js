@@ -34,6 +34,8 @@ const promisify = function (object, method) {
 }
 
 AsyncRedis.decorate = redisClient => objectDecorator(redisClient, (name, method) => {
+  const asyncClient = Object.create(redisClient);
+  
   if (commandSet.has(name)) {
     return promisify(redisClient, method);
   } else if (queueCommandSet.has(name)) {
