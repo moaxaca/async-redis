@@ -1,9 +1,13 @@
 {
   "root": true,
-  "extends": [
-    "airbnb"
-  ],
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "script"
+  },
   "env": {
-    "node": true
+    "es6": true,
+    "node": true,
+    "mocha": true
   }
 }

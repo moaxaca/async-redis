@@ -1,25 +1,25 @@
 const { assert } = require('chai');
 const AsyncRedis = require('../../../src');
 
-describe('Commands - Common', function () {
+describe('Commands - Common', () => {
   let redisClient;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     redisClient = new AsyncRedis();
   });
 
-  afterEach(async() => {
+  afterEach(async () => {
     redisClient.flushall();
   });
 
-  describe('test set method', function () {
+  describe('test set method', () => {
     it('should return ok', async () => {
-      let status = await redisClient.set('hello', 'world');
+      const status = await redisClient.set('hello', 'world');
       assert.equal(status, 'OK');
     });
   });
 
-  describe('test get method', function () {
+  describe('test get method', () => {
     it('should return value', async () => {
       await redisClient.set('hello', 'world');
       const value = await redisClient.get('hello');
@@ -27,7 +27,7 @@ describe('Commands - Common', function () {
     });
   });
 
-  describe('test del method', function () {
+  describe('test del method', () => {
     it('should return true', async () => {
       await redisClient.set('hello', 'world');
       const status = await redisClient.del('hello');
@@ -40,7 +40,7 @@ describe('Commands - Common', function () {
     });
   });
 
-  describe('test del method', function () {
+  describe('test del method', () => {
     it('should return true', async () => {
       await redisClient.set('hello', 'world');
       const status = await redisClient.del('hello');
@@ -48,17 +48,16 @@ describe('Commands - Common', function () {
     });
   });
 
-  describe('test rejection', function () {
+  describe('test rejection', () => {
     it('should reject promise on throw', async () => {
-      let promise = redisClient.set('hello');
+      const promise = redisClient.set('hello');
       assert.isRejected(promise, Error);
     });
   });
 
-  describe('test multi not a promise', function () {
+  describe('test multi not a promise', () => {
     it('should be not equal', async () => {
-      let notAPromise = redisClient.multi();
-      console.log(notAPromise);
+      const notAPromise = redisClient.multi();
       assert.notEqual(Promise.resolve(notAPromise), notAPromise);
     });
   });

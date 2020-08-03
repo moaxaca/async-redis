@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const { RedisClient } = require('redis');
 const AsyncRedis = require('../../src');
 
-describe('AsyncRedis.createClient', function () {
+describe('AsyncRedis.createClient', () => {
   const options = {
     host: '127.0.0.1',
     port: 6379,
