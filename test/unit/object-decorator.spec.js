@@ -1,7 +1,8 @@
 const { assert } = require('chai');
-const objectDecorator = require('../../src/object-decorator');
 
-const Mock = () => {
+const objectDecoratorSpec = require('../../src/object-decorator');
+
+const Mock = function() {
   this.add = (a, b) => a + b;
   this.subtract = (a, b) => a - b;
 };
@@ -10,7 +11,7 @@ describe('Object Decorator', () => {
   it('should decorate a method', async () => {
     const mock = new Mock();
     const mockTwo = new Mock();
-    objectDecorator(mock, (name, method) => {
+    objectDecoratorSpec(mock, (name, method) => {
       switch (name) {
         case 'add':
           return (...args) => {
