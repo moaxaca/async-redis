@@ -23,7 +23,7 @@ AsyncRedis.prototype.setup = function(redisClient) {
   const commandConfigs = redisCommands(redisClient);
   objectDecorator(redisClient, (name, method) => {
     if (commandConfigs.commands.has(name)) {
-      objectPromisify(this, method);
+      objectPromisify(this, redisClient, name);
     } else if (commandConfigs.queueCommands.has(name)) {
       return (...args) => {
         const multi = method.apply(redisClient, args);

@@ -2,7 +2,7 @@
   "private": false,
   "author": "Matthew Oaxaca",
   "license": "MIT",
-  "version": "1.1.8",
+  "version": "2.0.0",
   "name": "async-redis",
   "keywords": [
     "redis",
@@ -40,6 +40,8 @@
     "redis": "3.0.2"
   },
   "devDependencies": {
+    "@types/node": "^14.0.27",
+    "@types/redis": "^2.8.25",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.1.0",

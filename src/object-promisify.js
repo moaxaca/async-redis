@@ -1,19 +1,20 @@
 /**
+ * @param proxy
  * @param object
- * @param method
- * @returns {*}
+ * @param name
+ * @returns void
  */
-module.exports = (object, method) => {
-  return (...args) => new Promise((resolve, reject) => {
-    args.push((error, ...results) => {
-      console.log(results);
-      if (error) {
-        reject(error, ...results);
-      } else {
-        resolve(...results);
-      }
+module.exports = (proxy, object, name) => {
+  proxy[name] = (...args) => {
+    return new Promise((resolve, reject) => {
+      args.push((error, ...results) => {
+        if (error) {
+          reject(error, ...results);
+        } else {
+          resolve(...results);
+        }
+      });
+      object[name](...args);
     });
-    objects.
-    method.apply(object, args);
-  });
+  };
 };
