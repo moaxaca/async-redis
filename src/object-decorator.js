@@ -6,7 +6,10 @@
 module.exports = (object, decorator) => {
   for (const prop in object) {
     if (typeof object[prop] === 'function') {
-      decorator(prop, object[prop]);
+      const returned = decorator(prop, object[prop]);
+      if (typeof returned === 'function') {
+        object[prop] = returned;
+      }
     }
   }
   return object;
