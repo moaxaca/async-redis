@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
-        redis-version: [4, 5, 6]
+        redis-version: [4, 5]
     steps:
     - uses: actions/checkout@v2
     - name: Node ${{ matrix.node-version }}
