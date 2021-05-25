@@ -1,29 +1,27 @@
-const asyncRedis = require("../src");
+/* eslint no-console: 0 */
+const asyncRedis = require('../src');
+
 const client = asyncRedis.createClient();
 
-client.on("error", function (err) {
-  console.log("Error " + err);
+client.on('error', (err) => {
+  console.log(`Error ${err}`);
 });
 
-let addToSet = async () => {
-  let key = 'exampleSet';
-  let values = [
+const addToSet = async () => {
+  const key = 'exampleSet';
+  const values = [
     'item_1',
     'item_2',
     'item_3',
     'item_4',
     'item_5',
   ];
-  let promises = values.map((value) => {
-    return client.sadd(key, value);
-  });
+  const promises = values.map(value => client.sadd(key, value));
   await Promise.all(promises);
-  return await client.smembers(key);
+  return client.smembers(key);
 };
 
-let flush = async () => {
-  return await client.flushall();
-};
+const flush = async () => client.flushall();
 
 addToSet()
   .then((results) => {

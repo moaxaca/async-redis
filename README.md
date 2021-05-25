@@ -16,13 +16,6 @@ To install the stable version:
 npm install --save async-redis
 ```
 
-## Typescript Support
-``` 
-npm install --save-dev @types/async-redis
-```
-
-[types](https://www.npmjs.com/package/@types/async-redis)
-
 ## Usage Example
 
 ### Creating Connection

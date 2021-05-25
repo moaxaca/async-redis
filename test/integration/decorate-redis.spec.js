@@ -1,15 +1,18 @@
 const { assert } = require('chai');
 const redis = require('redis');
-const redisCommands = require('redis-commands');
-const AsyncRedis = require('../../src');
 
-describe('AsyncRedis.decorate', function () {
-  const client = redis.createClient();
-  const asyncRedisClient = AsyncRedis.decorate(client);
+const AsyncRedis = require('../../src');
+const getRedisCommands = require('../../src/redis-commands');
+const getTestRedisConfig = require('../util/getTestRedisConfig');
+
+describe('AsyncRedis.decorate', () => {
+  const options = getTestRedisConfig();
+  const redisClient = redis.createClient(options);
+  const asyncRedisClient = AsyncRedis.decorate(redisClient);
 
   it('should have decorated every command', async () => {
-    const commands = redisCommands.list;
-    commands.forEach(command => {
+    const commands = getRedisCommands(redisClient).commands;
+    commands.forEach((command) => {
       assert.isFunction(asyncRedisClient[command], `redis.${command} isn't decorated`);
     });
   });
