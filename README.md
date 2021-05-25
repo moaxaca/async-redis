@@ -1,6 +1,6 @@
 Async Redis
 ===========================
-[![Build Status](https://travis-ci.org/moaxaca/async-redis.svg?branch=master)](https://travis-ci.org/moaxaca/async-redis)
+[![ci](https://github.com/moaxaca/async-redis/actions/workflows/ci.yaml/badge.svg)](https://github.com/moaxaca/async-redis/actions/workflows/ci.yaml)
 [![npm](https://img.shields.io/npm/v/async-redis.svg)](https://www.npmjs.com/package/async-redis)
 [![npm](https://img.shields.io/npm/dm/async-redis.svg)](https://www.npmjs.com/package/async-redis)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/moaxaca/async-redis/blob/master/LICENSE)
