@@ -18,14 +18,19 @@ const AsyncRedis = function (args=null) {
   }
 };
 
+/**
+ * @param {*} redisClient
+ * @returns void
+ */
 AsyncRedis.prototype.setup = function(redisClient) {
   this.__redisClient = redisClient;
   const commandConfigs = redisCommands(redisClient);
   objectDecorator(redisClient, (name, method) => {
     if (commandConfigs.commands.has(name)) {
       objectPromisify(this, redisClient, name);
-    } else if (commandConfigs.queueCommands.has(name)) {
-      return (...args) => {
+    }
+    if (commandConfigs.queueCommands.has(name)) {
+      this[name] = (...args) => {
         const multi = method.apply(redisClient, args);
         return objectDecorator(multi, (multiName, multiMethod) => {
           if (commandConfigs.multiCommands.has(multiName)) {
@@ -38,8 +43,16 @@ AsyncRedis.prototype.setup = function(redisClient) {
   });
 };
 
+/**
+ * @param  {...any} args
+ * @returns AsyncRedis
+ */
 AsyncRedis.createClient = (...args) => new AsyncRedis(args);
 
+/**
+ * @param {Redis} redisClient
+ * @returns AsyncRedis
+ */
 AsyncRedis.decorate = (redisClient) => {
   const asyncClient = new AsyncRedis();
   asyncClient.setup(redisClient);
