@@ -1,47 +1,49 @@
 const redis = require('redis');
-const commands = require('redis-commands').list;
 const objectDecorator = require('./object-decorator');
+const objectPromisify = require('./object-promisify');
+const redisCommands = require('./redis-commands');
 
-const AsyncRedis = function (args) {
-  const client = Array.isArray(args) ? redis.createClient(...args) : redis.createClient(args);
-  return AsyncRedis.decorate(client);
+const redisClients = new Map();
+
+/**
+ * @return RedisClient
+ */
+const AsyncRedis = function (args=null) {
+  if (args) {
+    const serializedArgs = JSON.stringify(args);
+    if (!redisClients.has(serializedArgs)) {
+      redisClients.set(serializedArgs, Array.isArray(args) ? redis.createClient(...args) : redis.createClient(args));
+    }
+    this.setup(redisClients.get(serializedArgs));
+  }
+};
+
+AsyncRedis.prototype.setup = function(redisClient) {
+  this.__redisClient = redisClient;
+  const commandConfigs = redisCommands(redisClient);
+  objectDecorator(redisClient, (name, method) => {
+    if (commandConfigs.commands.has(name)) {
+      objectPromisify(this, redisClient, name);
+    } else if (commandConfigs.queueCommands.has(name)) {
+      return (...args) => {
+        const multi = method.apply(redisClient, args);
+        return objectDecorator(multi, (multiName, multiMethod) => {
+          if (commandConfigs.multiCommands.has(multiName)) {
+            return objectPromisify(multi, multiMethod);
+          }
+          return multiMethod;
+        });
+      }
+    }
+  });
 };
 
 AsyncRedis.createClient = (...args) => new AsyncRedis(args);
 
-const commandsToSkipSet = new Set(['multi']);
-const commandSet = new Set(commands.filter(c => !commandsToSkipSet.has(c)));
-const queueCommandSet = new Set(['batch', 'multi']);
-const multiCommandSet = new Set(['exec', 'exec_atomic']);
-
-const promisify = function (object, method) {
-  return (...args) => new Promise((resolve, reject) => {
-    args.push((error, ...results) => {
-      if (error) {
-        reject(error, ...results);
-      } else {
-        resolve(...results);
-      }
-    });
-    method.apply(object, args);
-  });
+AsyncRedis.decorate = (redisClient) => {
+  const asyncClient = new AsyncRedis();
+  asyncClient.setup(redisClient);
+  return asyncClient;
 };
-
-AsyncRedis.decorate = redisClient => objectDecorator(redisClient, (name, method) => {
-  if (commandSet.has(name)) {
-    return promisify(redisClient, method);
-  } else if (queueCommandSet.has(name)) {
-    return (...args) => {
-      const multi = method.apply(redisClient, args);
-      return objectDecorator(multi, (multiName, multiMethod) => {
-        if (multiCommandSet.has(multiName)) {
-          return promisify(multi, multiMethod);
-        }
-        return multiMethod;
-      });
-    }
-  }
-  return method;
-});
 
 module.exports = AsyncRedis;

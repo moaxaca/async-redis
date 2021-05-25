@@ -2,7 +2,7 @@
   "private": false,
   "author": "Matthew Oaxaca",
   "license": "MIT",
-  "version": "1.1.8",
+  "version": "2.0.0",
   "name": "async-redis",
   "keywords": [
     "redis",
@@ -30,20 +30,22 @@
   "scripts": {
     "coveralls": "nyc yarn test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint --fix --ext .js, .",
-    "test": "mocha",
-    "test:unit": "mocha",
+    "test": "mocha test/**/*.spec.js --config test/setup.js --exit",
+    "test:unit": "mocha test/unit/*.spec.js --config test/setup.js --exit",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
     "version:major": "npm version major"
   },
   "dependencies": {
-    "redis": "^3.0.2",
-    "redis-commands": "^1.6.0"
+    "redis": "3.0.2"
   },
   "devDependencies": {
+    "@types/node": "^14.0.27",
+    "@types/redis": "^2.8.25",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.1.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.6.0",
     "mocha": "^8.1.0",
     "nyc": "^15.1.0"

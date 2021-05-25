@@ -1,7 +1,8 @@
 const { assert } = require('chai');
+
 const objectDecorator = require('../../src/object-decorator');
 
-const Mock = () => {
+const Mock = function() {
   this.add = (a, b) => a + b;
   this.subtract = (a, b) => a - b;
 };
