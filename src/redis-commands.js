@@ -1,4 +1,3 @@
-const commandsToSkipSet = new Set(['multi']);
 const queueCommands = new Set(['batch', 'multi']);
 const multiCommands = new Set(['exec', 'exec_atomic']);
 
@@ -14,7 +13,7 @@ module.exports = (redisClient) => {
     }
   }
   return {
-    commands: new Set(commands.filter(c => !commandsToSkipSet.has(c))),
+    commands: new Set(commands.filter(c => !queueCommands.has(c))),
     queueCommands,
     multiCommands,
   }

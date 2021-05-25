@@ -23,7 +23,7 @@ describe('Commands', () => {
       assert.equal(typeof redis.auth, 'function');
     });
 
-    it('should test rejection', async () => {
+    xit('should test rejection', async () => {
       const promise = redis.auth('bad_password');
       assert.isRejected(promise, Error);
     });
@@ -93,19 +93,51 @@ describe('Commands', () => {
         .del('hello');
     });
 
+    afterEach(async () => {
+      await redis.del('test');
+    });
+
     it('should run multi into exec', async () => {
       const results = await multiClient.exec();
-      console.log(results);
+      assert.equal(results, true);
+      const value = await redis.get('test');
+      assert.equal(value, "value");
     });
 
     it('should run multi into exec_atomic', async () => {
       const results = await multiClient.exec_atomic();
-      console.log(results);
+      assert.equal(results, true);
+      const value = await redis.get('test');
+      assert.equal(value, "value");
+    });
+  });
+
+  describe('test batch not a promise', () => {
+    let multiClient = null;
+    beforeEach(async () => {
+      multiClient = redis.batch();
+      multiClient.set('test', 'value');
+      multiClient.set('foo', 'bar')
+        .set('hello', 'world')
+        .del('hello');
+    });
+
+    afterEach(async () => {
+      await redis.del('test');
+    });
+
+    it('should run multi into exec', async () => {
+      const results = await multiClient.exec();
+      assert.equal(results, true);
+      const value = await redis.get('test');
+      assert.equal(value, "value");
     });
 
     it('should run multi into exec_atomic', async () => {
-      const results = await multiClient.batch();
-      console.log(results);
+      const results = await multiClient.exec_atomic();
+      assert.equal(results, true);
+      const value = await redis.get('test');
+      assert.equal(value, "value");
     });
   });
 
