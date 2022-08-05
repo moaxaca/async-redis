@@ -1,4 +1,3 @@
-
 name: Continuous Integration
 on:
   push:
@@ -6,24 +5,25 @@ on:
       - main
   pull_request:
     types: [opened, reopened, synchronize]
+
 jobs:
   build-and-test:
     name: "Build & Test"
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [16.x]
         redis-version: [4, 5]
     steps:
-    - uses: actions/checkout@v2
-    - name: Node ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Start Redis
-      uses: supercharge/redis-github-action@1.2.0
-      with:
-        redis-version: ${{ matrix.redis-version }}
-    - run: yarn install
-    - run: yarn lint
-    - run: yarn test
+      - uses: actions/checkout@v2
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.2.0
+        with:
+          redis-version: ${{ matrix.redis-version }}
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test

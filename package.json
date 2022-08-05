@@ -1,9 +1,9 @@
 {
+  "name": "@gamma-app/async-redis",
   "private": false,
   "author": "Matthew Oaxaca",
   "license": "MIT",
   "version": "2.0.0",
-  "name": "async-redis",
   "keywords": [
     "redis",
     "async",
@@ -13,15 +13,15 @@
   "description": "Light wrapper over redis_node with first class async & promise support.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/moaxaca/async-redis.git"
+    "url": "git://github.com/gamma-app/async-redis.git"
   },
   "bugs": {
-    "url": "https://github.com/moaxaca/async-redis/issues"
+    "url": "https://github.com/gamma-app/async-redis/issues"
   },
   "main": "src/index.js",
   "typings": "src/index.d.ts",
   "engines": {
-    "node": ">=7.6.0"
+    "node": ">=16.0"
   },
   "directories": {
     "example": "examples",
@@ -38,7 +38,7 @@
     "version:major": "npm version major"
   },
   "dependencies": {
-    "redis": "3.1.2"
+    "redis": "^3.1.2"
   },
   "devDependencies": {
     "@types/node": "^15.6.1",
